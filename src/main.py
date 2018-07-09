@@ -1,4 +1,5 @@
-import engine.engine as e
+import src.engine.engine as e
+
 
 def main():
     game = e.Engine("DawnRPG", 1024, 768)
