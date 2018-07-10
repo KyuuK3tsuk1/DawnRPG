@@ -1,8 +1,8 @@
 import pygame as pg
 
-import content.stage as stage
-import content.actors as actors
-import engine.config as cfg
+import src.content.stage as stage
+import src.content.actors as actors
+import src.engine.config as cfg
 
 
 class Engine:
