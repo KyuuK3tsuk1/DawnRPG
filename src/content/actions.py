@@ -26,7 +26,6 @@ class Walk(Action):
             self.actor.x += dx
             self.actor.y += dy
             self.actor.stage.actors[self.actor.x][self.actor.y] = self.actor
-            print(self.actor.stage.actors[self.actor.x][self.actor.y])
 
 
 class OpenDoor(Action):

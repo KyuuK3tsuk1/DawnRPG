@@ -1,16 +1,19 @@
 import pygame as pg
 
-import src.content.stage as stage
+import src.content.dungeon as dungeon
+import src.content.forest as forest
 import src.content.actors as actors
 import src.engine.config as cfg
 
 
 class Engine:
-    def __init__(self, title, win_w, win_h):
+    def __init__(self, title: str, win_w: int, win_h: int):
         self.title = title
         self.win_w = win_w
         self.win_h = win_h
 
+        pg.init()
+        pg.mixer.init()
         self.window = pg.display.set_mode((self.win_w, self.win_h))
         self.clock = pg.time.Clock()
         self.running = True
@@ -27,7 +30,7 @@ class Engine:
         self.actors = []
         self.current_actor = 0
 
-        self.stage = stage.Stage(self, 10, 10)
+        self.stage = forest.Forest(self, 50, 50)
         self.stage.generate()
 
         self.player = actors.Hero(self, self.stage, 2, 2)

@@ -13,13 +13,18 @@ class Actor(pg.sprite.Sprite):
         self.stage = stage
         self.x, self.y = x, y
         super().__init__(self.game.all_sprites)
-        self.image = pg.Surface((cfg.TILE_SIZE, cfg.TILE_SIZE))
+        self.image = self.to_glyph("@", Colors.Red)
         self.rect = self.image.get_rect()
         self.rect.topleft = self.x * cfg.TILE_SIZE, self.y * cfg.TILE_SIZE
 
         self.game.add_actor(self)
 
         self.next_action = None
+    
+    def to_glyph(self, char, fg_color):
+        font = pg.font.Font(cfg.DEFAULT_FONT, cfg.TILE_SIZE)
+        glyph = font.render(char, True, fg_color, Colors.Black)
+        return glyph
 
     def get_action(self):
         action = self.next_action
@@ -37,22 +42,18 @@ class Hero(Actor):
     def __init__(self, game, stage, x, y):
         super().__init__(game, stage, x, y)
 
-        self.image.fill(Colors.Green)
+        self.image = self.to_glyph("@", Colors.Green)
 
     def handle_input(self, event):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_w:
                 self.set_next_action(actions.Walk(self, Directions.Up))
-                print(self.x, self.y)
             if event.key == pg.K_a:
                 self.set_next_action(actions.Walk(self, Directions.Left))
-                print(self.x, self.y)
             if event.key == pg.K_s:
                 self.set_next_action(actions.Walk(self, Directions.Down))
-                print(self.x, self.y)
             if event.key == pg.K_d:
                 self.set_next_action(actions.Walk(self, Directions.Right))
-                print(self.x, self.y)
             if event.key == pg.K_e:
                 self.set_next_action(actions.OpenDoor(self, None))
             if event.key == pg.K_q:

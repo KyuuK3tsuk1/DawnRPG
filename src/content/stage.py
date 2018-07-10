@@ -25,7 +25,7 @@ class Stage:
     def fill_with(self, tile_type):
         self.tiles = [[tile_type(self, x, y) for x in range(
             self.width)] for y in range(self.height)]
-
+ 
     def in_bounds(self, x, y) -> bool:
         if (0 <= x < self.width) and (0 <= y < self.height):
             return True
